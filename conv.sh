@@ -20,11 +20,11 @@ select option in pdflatex lualatex xelatex
 do
     case $option in
         pdflatex) 
-            echo "pdflatex engine selected";;
+            echo -e "\npdflatex engine selected";;
         lualatex) 
-            echo "lualatex engine selected";;
+            echo -e "\nlualatex engine selected";;
         xelatex)
-        	echo "xelatex";;
+        	echo -e "\nxelatex";;
         *)
 			echo "Please choose an option";;
 	esac
@@ -32,10 +32,10 @@ do
 done
 echo
 
-echo -n "Add any latex typesetting variables you would like (e.g. --variable mainfont:\"Cabin\"): "
+echo -n "Would you like to add any latex typesetting variables(e.g. --variable mainfont:\"Gill Sans\")?: "
 read variable
 
-echo -e "\nBeginning conversion..."
+echo -e "\nBeginning conversion...\n"
 
 find . -iname "*.mdown" | while read -r i; do
 	y="$i"
@@ -44,8 +44,8 @@ find . -iname "*.mdown" | while read -r i; do
 	if [ ! -f ./PDFs/"$z".pdf ]; then
 		pandoc -f markdown "$i" --latex-engine=$option --variable font-family:sans-serif $variable -o ./PDFs/"$z".pdf  
 	 	((count++))
-	 	echo $count/$total Complete!
+	 	echo $count/$total compiled.
 	fi
 done
 
-echo All files complete!
+echo -e "\nAll files complete!"
