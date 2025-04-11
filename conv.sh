@@ -55,7 +55,7 @@ find . -iname "*.mdown" | while read -r i; do
 	x="${y%.*}"
 	z="${x##*/}"
 	if [ ! -f ./PDFs/"$z".pdf ]; then
-		pandoc -f markdown "$i" --latex-engine=$option --variable font-family:sans-serif $variable -o ./PDFs/"$z".pdf  
+		pandoc -f markdown "$i" --pdf-engine=$option --variable font-family:sans-serif $variable -o ./PDFs/"$z".pdf  
 	 	((count++))
 	 	echo $count/$total compiled.
 	fi
